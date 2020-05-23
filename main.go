@@ -41,7 +41,7 @@ func main() {
 			msg = fmt.Sprintf("%s %s", msg, name)
 
 			if m.UserJoined.Username != "" {
-				msg = fmt.Sprintf("%s %s \\(@%s\\)", msg, name, m.UserJoined.Username)
+				msg = fmt.Sprintf("%s \\(@%s\\)", msg, m.UserJoined.Username)
 			}
 
 			msg = fmt.Sprintf("%s\n\\#new\\_member \\#c%s \\#u%s", msg, m.Chat.Recipient()[4:], m.UserJoined.Recipient())
