@@ -49,7 +49,7 @@ func main() {
 		b.Updates <- tb.Update{
 			Message: &tb.Message{
 				Chat: &tb.Chat{
-					ID:         -1001050101913,
+					ID:         -1001090101913,
 					Title:      "Chat Title",
 					Type:       tb.ChatGroup,
 					Username:   "testUsername",
