@@ -10,31 +10,31 @@ import (
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
-func checkErr(e error) {
+func checkErr(where string, e error) {
 	if e != nil {
-		log.Fatal(e)
+		log.Fatalf("Error in section %s: %s", where, e)
 	}
 }
 
 func main() {
 	config, err := ini.Load("config.ini")
-	checkErr(err)
+	checkErr("ini.Load", err)
 
 	owner, err := config.Section("bot").Key("owner").Int()
-	checkErr(err)
+	checkErr("owner", err)
 
 	logchannel, err := config.Section("bot").Key("logchannel").Int64()
-	checkErr(err)
+	checkErr("logchannel", err)
 
 	watchchannel, err := config.Section("bot").Key("channeltowatch").Int64()
-	checkErr(err)
+	checkErr("watchchannel", err)
 
 	b, err := tb.NewBot(tb.Settings{
 		Token:  config.Section("bot").Key("token").String(),
 		Poller: &tb.LongPoller{Timeout: 10 * time.Second},
 	})
 
-	checkErr(err)
+	checkErr("NewBot", err)
 
 	b.Handle("/setmessage", func(m *tb.Message) {
 		if m.Sender.ID == owner {
